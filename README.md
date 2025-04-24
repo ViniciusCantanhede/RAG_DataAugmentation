@@ -1,4 +1,4 @@
-# Data Augmentation para RAG
+# Data Augmentation com Google Deep Translator para RAG
 
 Este projeto implementa uma ferramenta de processamento de documentos para melhorar sistemas de Retrieval Augmented Generation (RAG), focando especificamente no pré-processamento de documentos PDF através de data augmentation por tradução.
 
