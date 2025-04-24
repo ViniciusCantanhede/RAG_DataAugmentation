@@ -1,0 +1,23 @@
+# Ambiente
+.env
+.venv
+env/
+venv/
+ENV/
+venv/
+__pycache__/
+*.py[cod]
+
+# Cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Arquivos temporários
+output/
+temp/
+data/
+
+# IDEs
+.vscode/
+.idea/

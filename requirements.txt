@@ -1,0 +1,6 @@
+streamlit==1.32.0
+docling  # Para converter PDF para markdown
+deep-translator==1.11.4
+python-dotenv==1.0.0
+tqdm==4.66.1  # Para barras de progresso no terminal
+pypdf==3.17.1
