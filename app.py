@@ -136,18 +136,36 @@ if pdf_file:
                         
                         st.table(file_info)
                         
-                        # Botão para download
+                        # Botão para download com session_state
                         st.markdown("### Download de Arquivos")
+
+                        # Inicialize session_state para armazenar os dados dos arquivos
+                        if 'file_data' not in st.session_state:
+                            st.session_state.file_data = {}
+
+                        # Armazene os dados dos arquivos no session_state
                         for key, path in file_paths.items():
-                            with open(path, "r", encoding="utf-8") as file:
-                                content = file.read()
-                                file_name = os.path.basename(path)
-                                st.download_button(
-                                    label=f"Download {key}",
-                                    data=content,
-                                    file_name=file_name,
-                                    mime="text/markdown"
-                                )
+                            if key not in st.session_state.file_data:
+                                with open(path, "r", encoding="utf-8") as file:
+                                    st.session_state.file_data[key] = {
+                                        'content': file.read(),
+                                        'filename': os.path.basename(path)
+                                    }
+
+                        # Crie os botões de download usando os dados armazenados
+                        for key in st.session_state.file_data:
+                            st.download_button(
+                                label=f"Download {key}",
+                                data=st.session_state.file_data[key]['content'],
+                                file_name=st.session_state.file_data[key]['filename'],
+                                mime="text/markdown",
+                                key=f"download_{key}"  # Importante: adicione uma chave única para cada botão
+                            )
+
+                        # Adicione um botão para limpar os downloads se necessário
+                        if st.button("Limpar downloads", key="clear_downloads"):
+                            st.session_state.file_data = {}
+                            st.rerun()
             
             # Remover arquivo temporário
             os.unlink(pdf_path)
